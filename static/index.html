@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credit Risk Check</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="intro">
+      <h1>Will this loan be repaid?</h1>
+      <p>Enter the applicant's details and get a default probability in seconds, with a clear low-risk or high-risk call.</p>
+    </header>
+
+    <div class="grid">
+      <form id="form" class="card" novalidate>
+        <fieldset>
+          <legend>Applicant</legend>
+          <label>Age<input type="number" name="person_age" min="18" max="100" required placeholder="28"></label>
+          <label>Annual income<input type="number" name="person_income" min="1" step="any" required placeholder="55000"></label>
+          <label>Home ownership
+            <select name="person_home_ownership" required>
+              <option value="" disabled selected>Select</option>
+              <option value="RENT">Rent</option><option value="OWN">Own</option>
+              <option value="MORTGAGE">Mortgage</option><option value="OTHER">Other</option>
+            </select>
+          </label>
+          <label>Employment length (years)<input type="number" name="person_emp_length" min="0" step="any" required placeholder="4"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Loan</legend>
+          <label>Purpose
+            <select name="loan_intent" required>
+              <option value="" disabled selected>Select</option>
+              <option value="PERSONAL">Personal</option><option value="EDUCATION">Education</option>
+              <option value="MEDICAL">Medical</option><option value="VENTURE">Venture</option>
+              <option value="HOMEIMPROVEMENT">Home improvement</option><option value="DEBTCONSOLIDATION">Debt consolidation</option>
+            </select>
+          </label>
+          <label>Loan grade
+            <select name="loan_grade" required>
+              <option value="" disabled selected>Select</option>
+              <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>
+            </select>
+          </label>
+          <label>Loan amount<input type="number" name="loan_amnt" min="1" step="any" required placeholder="10000"></label>
+          <label>Interest rate (%)<input type="number" name="loan_int_rate" min="0" step="any" required placeholder="11.5"></label>
+          <label class="wide">Loan as share of income
+            <input type="text" name="loan_percent_income" readonly tabindex="-1" placeholder="Calculated from amount and income">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Credit history</legend>
+          <label>History length (years)<input type="number" name="cb_person_cred_hist_length" min="0" required placeholder="6"></label>
+          <div class="seg-wrap">
+            <span>Previous default on file</span>
+            <div class="seg">
+              <input type="radio" id="d-n" name="cb_person_default_on_file" value="N" checked><label for="d-n">No</label>
+              <input type="radio" id="d-y" name="cb_person_default_on_file" value="Y"><label for="d-y">Yes</label>
+              <i class="seg-thumb"></i>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" id="sample" class="ghost">Fill example</button>
+          <button type="submit" id="submit"><span class="btn-label">Assess risk</span><span class="spinner" aria-hidden="true"></span></button>
+        </div>
+      </form>
+
+      <aside id="result" class="card result" data-state="idle" aria-live="polite">
+        <svg viewBox="0 0 200 118" class="gauge" role="img" aria-label="Default probability gauge">
+          <path class="track" d="M 10 100 A 90 90 0 0 1 190 100" pathLength="100"/>
+          <path id="arc" class="arc" d="M 10 100 A 90 90 0 0 1 190 100" pathLength="100"/>
+          <line id="tick" class="tick" x1="0" y1="0" x2="0" y2="0"/>
+        </svg>
+        <div class="readout">
+          <div class="pct"><span id="pct">--</span><small>%</small></div>
+          <div class="pct-label">chance of default</div>
+        </div>
+        <div id="verdict" class="verdict">Awaiting application</div>
+        <p id="detail" class="detail">Fill in the form and select Assess risk.</p>
+      </aside>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
