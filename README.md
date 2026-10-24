@@ -159,7 +159,7 @@ The model was trained with scikit-learn 1.6.1, so `requirements.txt` pins that v
 
 ## Author
 
-**Tarun**, B.Tech Biotechnology, Dr. B. R. Ambedkar NIT Jalandhar. Aspiring data and analytics professional.
+**Tarun**, B.Tech, Dr. B. R. Ambedkar NIT Jalandhar. Aspiring data and analytics professional.
 
 ## License
 
